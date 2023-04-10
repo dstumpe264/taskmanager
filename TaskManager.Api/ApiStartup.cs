@@ -11,6 +11,8 @@ namespace TaskManager.Api
 {
     public class ApiStartup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+        
         public ApiStartup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -22,8 +24,19 @@ namespace TaskManager.Api
         public void ConfigureServices(IServiceCollection services)
         {
             Services.ServicesStartup.ConfigureServices(services, Configuration);
+            
+            services.AddCors(options => {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                policy => 
+                                {
+                                    policy.WithOrigins("https://localhost:44398", "https://localhost:5001");
+                                }
+                
+                );
+            });
 
             services.AddControllers();
+            services.AddRazorPages();
 
             services.AddSwaggerGen(c =>
             {
@@ -31,12 +44,15 @@ namespace TaskManager.Api
             });
 
             services.AddScoped<IToDoService, ToDoService>();
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IServiceProvider serviceProvider, IWebHostEnvironment env)
         {
             Services.ServicesStartup.Configure(serviceProvider);
+            
 
             if (env.IsDevelopment())
             {
@@ -44,14 +60,22 @@ namespace TaskManager.Api
             }
 
             app.UseHttpsRedirection();
-
+            app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+               
+                endpoints.MapControllers()
+                    .RequireCors(MyAllowSpecificOrigins);
+
+               
+
+                endpoints.MapRazorPages();
             });
 
             app.UseSwagger();
