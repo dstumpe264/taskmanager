@@ -17,7 +17,7 @@ namespace TaskManager.Web.Services
 
         public ToDoService(HttpClient client)
         {
-            client.BaseAddress = new Uri("https://localhost:44318/");
+            client.BaseAddress = new Uri("http://localhost:44318/");
             client.DefaultRequestHeaders.Add("Accept", "application/json");
 
             Client = client;

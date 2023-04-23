@@ -30,5 +30,15 @@ namespace TaskManager.Web.Pages
                 ToDos = new List<ToDo>();
             }
         }
+
+        // function for progress bar/ dropdown
+        // public Progress()
+        // {
+
+        // }
+        // display current progress status on button with color
+
+
+        // display red for past due, yellow for close, and green for 
     }
 }
