@@ -11,3 +11,4 @@ TaskManager.Services/obj
 TaskManager.Tests/bin
 TaskManager.Tests/obj
 TaskManager.Web/bin
+.ds_store
