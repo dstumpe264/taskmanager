@@ -3,8 +3,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    
 }
-
 <h1>To Dos</h1>
 
 <p>
@@ -35,6 +35,7 @@
     </thead>
     <tbody>
 @foreach (var item in Model.ToDos) {
+    string dueDate = item.DueDate.ToString("M/d/yy");
         <tr>
             <td>
                 <select class="custom-select">
@@ -50,16 +51,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DueDate)
-            </td>
-            <td>
+            
+            @* <td>
                 @Html.DisplayFor(modelItem => item.Notes)
+            </td> *@
+            @*  change to icons that only show when item is selected *@
+            <td>
+                <a asp-page="./Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info fa-xl" style="color: #3cbaaa;"></i> &nbsp;</a> 
+                <a asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-gear" style="font-size:24px;color:grey"></i> &nbsp;</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash fa-xl" style="color:grey"></i></a>
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                @*  insert colored dot for closeness to due date *@
+                @Html.DisplayFor(modelItem => dueDate)
             </td>
         </tr>
 }
