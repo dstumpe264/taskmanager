@@ -9,7 +9,8 @@
 
 @* Progress Indicator *@
 
-<div>Progress Indicator</div>
+<div>In Progress </div>
+<br>
 <div>
     <dl class="row">
         <dt class="col-sm-2">
@@ -39,6 +40,8 @@
     </dl>
 </div>
 <div>
+
+    <a asp-page="./Delete" class="btn btn-sec delete" asp-route-id="@Model.ToDo.Id">Delete</a>
     <a asp-page="./Index" class="btn btn-sec">Back to List</a>
     <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@Model.ToDo.Id">Edit</a>
 </div>
