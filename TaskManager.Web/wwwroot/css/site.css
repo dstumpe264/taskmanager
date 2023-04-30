@@ -44,6 +44,12 @@ a {
   padding-right: 200px;
   padding-left: 0;
 }
+.btn-primary.delete{
+  background-color: #FF6464;
+  color: #fff;
+  border-color: #FF6464;
+  box-shadow: 0 2px 0 0 #c82323;
+}
 
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
