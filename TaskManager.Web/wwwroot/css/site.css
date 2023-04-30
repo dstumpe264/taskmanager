@@ -38,6 +38,12 @@ a {
   background-color: transparent;
   margin-right: 24px;
 }
+.btn-sec.delete {
+  color: #FF6464;
+  width: auto;
+  padding-right: 200px;
+  padding-left: 0;
+}
 
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -112,7 +118,11 @@ button.accept-policy {
   height: 40px;
 }
 
+/* description list styles */
 
+dt {
+  padding-bottom: 30px;
+}
 
 
 /* Sticky footer styles
