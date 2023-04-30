@@ -5,11 +5,12 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>To Do Details</h1>
 
+@* Progress Indicator *@
+
+<div>Progress Indicator</div>
 <div>
-    <h4>ToDo</h4>
-    <hr />
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ToDo.Title)
@@ -38,6 +39,6 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.ToDo.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Index" class="btn btn-sec">Back to List</a>
+    <a asp-page="./Edit" class="btn btn-primary" asp-route-id="@Model.ToDo.Id">Edit</a>
 </div>
