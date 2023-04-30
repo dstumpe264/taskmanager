@@ -24,6 +24,22 @@ a {
   box-shadow: 0 2px 0 0 #2C99D7;
 }
 
+.btn-sec {
+  height: 20px;
+  width: 110px;
+  color: #2C99D7;
+  font-family: "Source Sans Pro";
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 20px;
+  text-align: center;
+  border-color: transparent;
+  background-color: transparent;
+  margin-right: 24px;
+}
+
+
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
