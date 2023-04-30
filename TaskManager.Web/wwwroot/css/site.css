@@ -16,14 +16,19 @@ a {
 
 .btn-primary {
   color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+  background-color: #46BCFF;
+  border-color: #2C99D7;
+  border-radius: 48.5px;
+  height: 38px;
+  width: 120px;
+  box-shadow: 0 2px 0 0 #2C99D7;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+  
 }
 
 /* Header */
@@ -31,7 +36,20 @@ a {
 #header {
   background-color: #39BAAA;
   font-size: x-large;
+  height: 88px;
+}
 
+/* logo size */
+
+.logo{
+  height: 40.61px;
+  width: 233px;
+
+}
+
+.responsive-web-branding-full-l {
+  height: 40.61px;
+  width: 233px;
 }
 
 /* Sticky footer styles
@@ -60,6 +78,26 @@ button.accept-policy {
   font-size: 1rem;
   line-height: inherit;
 }
+
+/* Text box styles */
+
+.text-box {
+  box-sizing: border-box;
+  height: 80px;
+  width: 590px;
+  border: 2px solid #B1B1B1;
+  border-radius: 6px;
+}
+.text-box.date {
+  height: 50%;
+  width: 50%;
+}
+.text-box.title {
+  height: 40px;
+}
+
+
+
 
 /* Sticky footer styles
 -------------------------------------------------- */
