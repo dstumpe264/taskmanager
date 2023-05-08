@@ -16,7 +16,8 @@ namespace TaskManager.Data.Migrations
                     Title = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     DueDate = table.Column<DateTime>(nullable: false),
-                    Notes = table.Column<string>(nullable: true)
+                    Notes = table.Column<string>(nullable: true),
+                    Status = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

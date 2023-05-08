@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -8,8 +10,8 @@ using TaskManager.Web.Services;
 
 namespace TaskManager.Web.Pages
 {
-    public class IndexModel : PageModel
-    {
+    public class IndexModel : PageModel {
+
         private readonly IToDoService _toDoService;
 
         public IndexModel(IToDoService toDoService)
@@ -19,8 +21,10 @@ namespace TaskManager.Web.Pages
 
         public List<ToDo> ToDos { get; set; }
 
+
         public async Task OnGetAsync()
         {
+        
             try
             {
                 ToDos = (await _toDoService.GetAsync()).ToList();
@@ -29,16 +33,33 @@ namespace TaskManager.Web.Pages
             {
                 ToDos = new List<ToDo>();
             }
+
         }
 
-        // function for progress bar/ dropdown
-        // public Progress()
-        // {
 
+        // public async Task OnPostAsync(int id, string status){
+        
+            
+        //     var todo = await _toDoService.GetAsync(id);
+        //     if(todo != null){
+
+        //         todo.Status = status;
+        //         await _toDoService.PutAsync(todo);
+        //     }
+        //     // return RedirectToPage();
+
+        //     // 
         // }
-        // display current progress status on button with color
 
+        public async Task<IActionResult> OnPostAsync(ToDo todo)
+        {
+            if (!ModelState.IsValid){
+                return Page();
+            }
 
-        // display red for past due, yellow for close, and green for 
+            var isSuccess = await _toDoService.PutAsync(todo);
+
+            return isSuccess ? RedirectToPage("./Index") : RedirectToPage("./Error");
+        }
     }
 }

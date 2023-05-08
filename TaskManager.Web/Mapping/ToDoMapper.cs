@@ -11,7 +11,8 @@ namespace TaskManager.Web.Mapping
                 Title = web.Title,
                 Description = web.Description,
                 DueDate = web.DueDate,
-                Notes = web.Notes
+                Notes = web.Notes,
+                Status = web.Status
             }
             : null;
 
@@ -20,7 +21,8 @@ namespace TaskManager.Web.Mapping
             Title = dto.Title,
             Description = dto.Description,
             DueDate = dto.DueDate,
-            Notes = dto.Notes
+            Notes = dto.Notes,
+            Status = dto.Status
         };
     }
 }
