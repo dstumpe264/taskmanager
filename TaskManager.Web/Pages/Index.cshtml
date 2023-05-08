@@ -11,11 +11,11 @@
     <a asp-page="Create"><img src="~/assets/Hover@1x.png" alt=""> Create</a>
 </p>
 <div class="progress">
-  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-danger" role="progressbar" style="width: @Model.ToDoProgress()%" ></div>
+  <div class="progress-bar bg-info" role="progressbar" style="width: @Model.InProgressProgress()%"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: @Model.DoneProgress()%"></div>
 </div>
-<table class="table">
+
     <thead>
         <tr>
             @* <th>
@@ -34,38 +34,73 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ToDos) {
-    string dueDate = item.DueDate.ToString("M/d/yy");
-        <tr>
-            <td>
-                <select class="custom-select">
-                    <option selected>Status</option>
-                    <option value="1">In Progress</option>
-                    <option value="2">To Do</option>
-                    <option value="3">Done</option>
-                </select>
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            
-            @* <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td> *@
-            @*  change to icons that only show when item is selected *@
-            <td>
-                <a asp-page="./Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info fa-xl" style="color: #3cbaaa;"></i> &nbsp;</a> 
-                <a asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-gear" style="font-size:24px;color:grey"></i> &nbsp;</a> 
-                <a asp-page="./Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash fa-xl" style="color:grey"></i></a>
-            </td>
-            <td>
-                @*  insert colored dot for closeness to due date *@
-                @Html.DisplayFor(modelItem => dueDate)
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model.ToDos) {
+                string dueDate = item.DueDate.ToString("M/d/yy");
+                    <tr>
+                        <td>
+                            
+                            <form method="post">
+                                <input type="hidden" name="id" value="@item.Id">
+                                <input type="hidden" name="dueDate" value="@item.DueDate">
+                                <input type="hidden" name="title" value="@item.Title">
+                                <input type="hidden" name="description" value="@item.Description">
+                                <input type="hidden" name="notes" value="@item.Notes">
+                                <select name="status" asp-for="@item.Status" onchange="this.form.submit()">
+                                    <option value="To Do" selected="selected">To Do</option>
+                                    <option value="In Progress" >In Progress</option>
+                                    <option value="Done">Done</option>
+                                </select>
+                            </form>
+                            
+                            @* @Html.DropDownListFor(modelItem => item.Status, new List<SelectListItem>{
+                                new SelectListItem { Value = "In Progress", Text = "In Progress"},
+                                new SelectListItem { Value = "To Do", Text = "To Do"},
+                                new SelectListItem { Value = "Done", Text = "Done"},
+                            }, new { id = 'status-dropdown'}) *@
+                            
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        
+                        @* <td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td> *@
+                        @*  change to icons that only show when item is selected *@
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id"><i class="fa-solid fa-circle-info fa-xl" style="color: #3cbaaa;"></i> &nbsp;</a> 
+                            <a asp-page="./Edit" asp-route-id="@item.Id"><i class="fa fa-gear" style="font-size:24px;color:grey"></i> &nbsp;</a> 
+                            <a asp-page="./Delete" asp-route-id="@item.Id"><i class="fa-solid fa-trash fa-xl" style="color:grey"></i></a>
+                        </td>
+                        <td>
+                            @*  insert colored dot for closeness to due date *@
+                            @Html.DisplayFor(modelItem => dueDate)
+                        </td>
+                    </tr>
+            }
+        </tbody>
+    </table>
+
+<script>
+    function updateStatus(todo) {
+        // Make an Ajax call to update the status of the todo
+        $.ajax({
+            type: "POST",
+            url: "/Index?handler=OnPostAsync",
+            data: { todo: todo},
+            success: function (result) {
+                // Reload the page
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>
