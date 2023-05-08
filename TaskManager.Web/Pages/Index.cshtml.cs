@@ -61,5 +61,30 @@ namespace TaskManager.Web.Pages
 
             return isSuccess ? RedirectToPage("./Index") : RedirectToPage("./Error");
         }
+
+        public double ToDoProgress()
+        {
+            var todos = ToDos.Where(t => t.Status == "To Do");
+            var totalTodos = ToDos.Count;
+            var completedTodos = todos.Count();
+
+            return (double)completedTodos / totalTodos * 100;
+        }
+        public double InProgressProgress()
+        {
+            var todos = ToDos.Where(t => t.Status == "In Progress");
+            var totalTodos = ToDos.Count;
+            var completedTodos = todos.Count();
+
+            return (double)completedTodos / totalTodos * 100;
+        }
+        public double DoneProgress()
+        {
+            var todos = ToDos.Where(t => t.Status == "Done");
+            var totalTodos = ToDos.Count;
+            var completedTodos = todos.Count();
+
+            return (double)completedTodos / totalTodos * 100;
+        }
     }
 }

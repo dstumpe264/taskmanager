@@ -11,9 +11,9 @@
     <a asp-page="Create"><img src="~/assets/Hover@1x.png" alt=""> Create</a>
 </p>
 <div class="progress">
-  <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-  <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+  <div class="progress-bar bg-danger" role="progressbar" style="width: @Model.ToDoProgress()%" ></div>
+  <div class="progress-bar bg-info" role="progressbar" style="width: @Model.InProgressProgress()%"></div>
+  <div class="progress-bar bg-success" role="progressbar" style="width: @Model.DoneProgress()%"></div>
 </div>
 
     <thead>
